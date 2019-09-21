@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title>B2M</title>
+	    <meta charset="utf-8">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	    <link rel="stylesheet" type="text/css" href="../static/main.css">
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+      <!-- Values from flask-->
+      <script>
+        var chosen_carottages = '{{chosen_carottages}}'
+        var csv_name = '{{ csv_name }}';
+
+        var carottages = '{{ carottages }}';
+        console.log('carottages', carottages);
+      </script>
+
+      <!-- Plotly.js -->
+      <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+      <script src="../static/plotly.js"></script> 
+
+  </head>
+
+  <body>
+    <div id="app" class="st-main">
+
+      <!-- HEADER -->
+      <div class="st-main-top">
+        <div class="st-main-logo-block" style='color: azure; font-size: 30px'>
+          <img src="../static/favicon.ico" class="st-main-logo-icon">
+          B2M
+        </div>
+      </div>
+
+
+      <div class="w3-main" style="margin-top:43px; height: 100%; width: 100%;">
+          <div class="w3-panel" style="padding-top:10px">
+              <div class="w3-row-padding">
+
+
+                <div class="w3-container w3-third">
+                      <form action="{{ url_for('main') }}" method="POST">
+                          <div class="form-group">
+                              <div class="input-group">
+                                  <select name="well" class="selectpicker form-control">
+                                      <option value="" disabled selected>Скважина</option>
+                                      {% for o in wells %}
+                                      <option type="text" value="{{o}}"> {{o}} </option>
+                                      {% endfor %}
+                                  </select>
+
+                                  <div style='color: red;'>
+                                      {{ error_mess }} 
+                                  </div>
+
+                                  <input type="text" style='padding-left:5px' class="form-control" id="user_input" placeholder="metric1" name="metric1" value="{{request.form.get('metric1','')}}">
+                                  <input type="text" style='padding-left:5px' class="form-control" id="user_input2" placeholder="metric2" name="metric2" value="{{request.form.get('metric2','')}}">
+                                  <input type="text" style='padding-left:5px' class="form-control" id="user_input3" placeholder="metric3" name="metric3" value="{{request.form.get('metric3','')}}">
+
+                              </div>
+
+                              <button type="submit" class="btn btn-primary w3-black button_RUN">Submit</button>
+                          </div>
+                      </form>
+                  </div>
+  
+                  <div class="w3-container w3-twothird">
+                      {% for o in data %}
+                      <div type="text" value="{{o}}"> {{o}} </div>
+                      {% endfor %}
+
+                      <div id="graph"></div>
+                  </div>
+
+              </div>
+          </div>
+
+          <!-- End page content -->
+      </div>
+
+    </div>
+  </body>
+</html>
