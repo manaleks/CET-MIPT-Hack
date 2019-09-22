@@ -32,7 +32,43 @@
           flex-direction: row;
           width: 100%;
           justify-content: space-between;
-      }      
+      }
+          #customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#table td, #table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#table tr:nth-child(even){background-color: #f2f2f2;}
+
+#table tr:hover {background-color: #ddd;}
+
+#table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+      #table tr:first-child td {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+
+          #table thead,
+tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
       
       </style>
   </head>
@@ -205,14 +241,17 @@
                       
                       <div id="graph"></div>
                   </div>
-                  
-                  <table id='table'></table>
-                  <button id='save_button' type="submit" onClick="location.href='/'" 
-                  class="btn btn-primary w3-green button_RUN" style='visibility:hidden' hidden>Сохранить</button>
 
+                  <div style="display:flex; flex-direction: row; width: 100%; justify-content: space-between;">
+                    <table id='table'></table>
+
+                  <button id='save_button' style="height: 50px;" type="submit" onClick="location.href='/'"
+                  class="btn btn-primary w3-green button_RUN" style='visibility:hidden' hidden>Сохранить</button>
+                </div>
                   <script src="http://d3js.org/d3.v3.min.js"></script>
 
                   <script type="text/javascript"charset="utf-8">
+                      
 
                       console.log(csv_name);
 
