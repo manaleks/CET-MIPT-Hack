@@ -167,6 +167,38 @@
                   <div class="w3-container w3-twothird">
                       MONEY
 
+                      <script src="http://d3js.org/d3.v3.min.js"></script>
+
+                      <script type="text/javascript"charset="utf-8">
+                          d3.text(csv_name, function(data) {
+                              var parsedCSV = d3.csv.parseRows(data);
+
+                              table = document.createElement('table')
+
+                              my_div = document.getElementById("app");
+                              document.body.insertBefore(table, my_div);
+
+                              for (var i = 0; i < parsedCSV.length; i++) {
+
+                                tr = document.createElement('tr')
+
+                                for (var j = 0; j < parsedCSV[i].length; j++) {
+                                  td = document.createElement('td');
+                                  td.text = parsedCSV[i][j];
+
+                                  var x = tr.insertCell(-1);
+                                  x.innerHTML=parsedCSV[i][j];
+                                
+                                }
+
+                                table.appendChild(tr);
+                                // ещё какие-то выражения
+                              }
+
+                              
+                          });
+                      </script>
+
                       <div id="graph"></div>
                   </div>
 

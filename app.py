@@ -59,8 +59,6 @@ def main():
         # read full data csv
         df = pd.read_csv('data/final.csv')
 
-        print(df.head())
-
         # choose well
         indexNames = df[df['well id'] != well ].index
         df.drop(indexNames , inplace=True)
