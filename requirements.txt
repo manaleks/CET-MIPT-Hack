@@ -3,3 +3,7 @@ requests
 pillow
 flask
 Werkzeug
+pandas
+numpy
+sklearn 
+catboost
