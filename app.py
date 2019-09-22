@@ -20,6 +20,10 @@ from werkzeug.utils import secure_filename
 # ds libs
 import pandas as pd
 import numpy as np
+import sklearn 
+import catboost
+
+#TOTAL_carottages = ['bk',	'GZ1',	'GZ2',	'GZ3',	'GZ4',	'GZ5',	'GZ7',	'DGK',	'NKTD',	'NKTM',	'NKTR',	'ALPS']
 
 app = Flask(__name__)
 
@@ -41,10 +45,7 @@ def main():
         well = int(float(request.form.get('well', -1)))
         if well == -1:
             return render_template('main.html', wells=TOTAL_WELLS, carottages=TOTAL_CAROTTAGE, error_mess='Выберите скважину')
-
-        metric1 = request.form['metric1']
-        metric2 = request.form['metric2']
-        metric3 = request.form['metric3']
+        carottages = request.form.getlist('carottages')
 
         # read full data csv
         df = pd.read_csv('data/test.csv')
@@ -54,7 +55,8 @@ def main():
         df.drop(indexNames , inplace=True)
 
         # sort
-        df  = df.sort_values(by=['depth, m'])
+        df = df.sort_values(by=['depth, m'])
+        df['well id'] = df['well id'].astype(int)
 
         # create chosen well csv
         csv_name = 'static/data/test{}.csv'.format(well)
@@ -62,13 +64,10 @@ def main():
 
         csv_name_to_js = '../' + csv_name
 
-        chosen_carottages = ['bk', 'GZ1', 'GZ2', 'GZ3', 'GZ4', 'GZ5']
-        chosen_carottages = json.dumps(chosen_carottages)
+        chosen_carottages = json.dumps(carottages)
 
-        print(chosen_carottages)
-        print(type(chosen_carottages))
-
-        return render_template('main.html', wells=TOTAL_WELLS, carottages=TOTAL_CAROTTAGE, chosen_carottages=chosen_carottages, csv_name=csv_name_to_js)
+        return render_template('main.html', wells=TOTAL_WELLS, carottages=TOTAL_CAROTTAGE, 
+                                            chosen_carottages=chosen_carottages, csv_name=csv_name_to_js)
 
     return render_template('main.html', wells=TOTAL_WELLS, carottages=TOTAL_CAROTTAGE)
 
