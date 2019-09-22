@@ -1,7 +1,8 @@
 
 
-traces = {'bk':'1',	'GZ1':'1',	'GZ2':'1',	'GZ3':'1',	'GZ4':'2',	'GZ5':'2',	'GZ7':'2',
-          'DGK':'2',	'NKTD':'3',	'NKTM':'3',	'NKTR':'3',	'ALPS':'3'}
+traces = {'bk':'1', 'GZ1':'3', 'GZ2':'3', 'GZ3':'3', 'GZ4':'3', 'GZ5':'1', 'GZ7':'1',
+          'DGK':'2', 'NKTD':'3', 'NKTM':'3', 'NKTR':'3', 'ALPS':'1'}
+
 colors = {'bk':'#c9a0dc',	'GZ1':'#082567',	'GZ2':'#6b8e23',	'GZ3':'#310062',	'GZ4':'#cc7722',	'GZ5':'#badbad',	'GZ7':'#ccccff',
           'DGK':'#013220',	'NKTD':'#1e90ff',	'NKTM':'#ebc2af',	'NKTR':'#ff2400',	'ALPS':'#6600ff'}
 
