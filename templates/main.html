@@ -194,67 +194,77 @@
   
                   <div class="w3-container w3-twothird">
                       
-                      <script src="http://d3js.org/d3.v3.min.js"></script>
-
-                      <script type="text/javascript"charset="utf-8">
-                          d3.text(csv_name, function(data) {
-                              var parsedCSV = d3.csv.parseRows(data);
-
-                              
-
-                              
-                              var labels = ['well id', 'depth, m']
-                              chosen_carottages.forEach(function(element) {
-                                labels.push(element);
-                              });
-                              labels.push("lith", "goal");
-
-                              numbers = [];
-                              for (var i = 0; i < parsedCSV[0].length; i++) {
-                                if (labels.includes(parsedCSV[0][i])) {
-                                  numbers.push(i);
-                                }
-                              }
-
-                              table = document.getElementById("table");
-                              //table = document.createElement('table');
-
-                              //my_div = document.getElementById("app");
-                              //document.body.insertBefore(table, my_div);
-
-                              for (var i = 0; i < parsedCSV.length; i++) {
-
-                                tr = document.createElement('tr')
-
-                                for (var j = 0; j < parsedCSV[i].length; j++) {
-                                  if (numbers.includes(j)){
-
-                                    if (j > parsedCSV[i].length-3 && i > 0){
-
-                                      var x = tr.insertCell(-1);
-                                      var element = document.createElement("input");
-                                      element.value=parsedCSV[i][j];
-                                      x.appendChild(element);
-                                    }
-                                    else {
-                                      var x = tr.insertCell(-1);
-                                      x.innerHTML=parsedCSV[i][j];
-                                    }
-                                  }
-                                }
-
-                                table.appendChild(tr);
-                                // ещё какие-то выражения
-                              }
-
-                              
-                          });
-                      </script>
-
                       <div id="graph"></div>
                   </div>
-
+                  
                   <table id='table'></table>
+                  <button id='save_button' type="submit" onClick="location.href='/'" 
+                  class="btn btn-primary w3-green button_RUN" style='visibility:hidden' hidden>Сохранить</button>
+
+                  <script src="http://d3js.org/d3.v3.min.js"></script>
+
+                  <script type="text/javascript"charset="utf-8">
+
+                      console.log(csv_name);
+
+                      if (csv_name.length > 0){
+
+                        d3.text(csv_name, function(data) {
+                            var parsedCSV = d3.csv.parseRows(data);
+
+  
+                            var labels = ['well id', 'depth, m']
+                            chosen_carottages.forEach(function(element) {
+                              labels.push(element);
+                            });
+                            labels.push("lith", "goal");
+
+                            numbers = [];
+                            for (var i = 0; i < parsedCSV[0].length; i++) {
+                              if (labels.includes(parsedCSV[0][i])) {
+                                numbers.push(i);
+                              }
+                            }
+
+                            table = document.getElementById("table");
+                            //table = document.createElement('table');
+
+                            //my_div = document.getElementById("app");
+                            //document.body.insertBefore(table, my_div);
+
+                            for (var i = 0; i < parsedCSV.length; i++) {
+
+                              tr = document.createElement('tr')
+
+                              for (var j = 0; j < parsedCSV[i].length; j++) {
+                                if (numbers.includes(j)){
+
+                                  if (j > parsedCSV[i].length-3 && i > 0){
+
+                                    var x = tr.insertCell(-1);
+                                    var element = document.createElement("input");
+                                    element.value=parsedCSV[i][j];
+                                    x.appendChild(element);
+                                  }
+                                  else {
+                                    var x = tr.insertCell(-1);
+                                    x.innerHTML=parsedCSV[i][j];
+                                  }
+                                }
+                              }
+
+                              table.appendChild(tr);
+                              // ещё какие-то выражения
+                            }
+                          
+                        });
+
+                      var item = document.getElementById('save_button');
+                      item.hidden = false;
+                      item.style.visibility = "visible"
+
+                    }
+                  </script>
 
               </div>
 
