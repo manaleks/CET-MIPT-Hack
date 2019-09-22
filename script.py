@@ -6,7 +6,7 @@ import catboost
 
 from catboost import CatBoostClassifier
 
-def predict(features, id_, thrashhold=0.5):
+def predict(features, id_, thrashhold=0.1831592068886578):
     #df = pd.read_excel('train_first.xlsx')
     #test_df = pd.read_excel('test.xlsx')
 
@@ -54,7 +54,12 @@ def predict(features, id_, thrashhold=0.5):
     for item in corotages:
         if item not in features:
             X_train.drop(item, axis=1, inplace=True)
-            X_test.drop(item, axis=1, inplace=True)       
+            X_test.drop(item, axis=1, inplace=True)
+
+    #OPTIMAL:
+    #model = CatBoostClassifier(iterations=500,
+    #                           learning_rate=0.01,
+    #                           depth=10, custom_metric='F1', random_seed=19)
 
     model = CatBoostClassifier(iterations=100,
                               learning_rate=0.1,
