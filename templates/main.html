@@ -28,7 +28,10 @@
 
       <style type=text/css>
       .check_carottages {
-        width:40px;
+        display: flex;
+          flex-direction: row;
+          width: 100%;
+          justify-content: space-between;
       }
       
       </style>
@@ -61,74 +64,98 @@
                                       {% endfor %}
                                   </select>
 
-                                  <div style='padding: "50px 10px 20px 30px"; color: red;'>
+                                  <div style='padding: 50px 10px 20px 30px; color: red;'>
                                       {{ error_mess }} 
                                   </div>
                               </div>
                               
-                              
-                              <div>
-                                <input type="checkbox" name="carottages" value="bk" checked>
-                                <span class= 'check_carottages' > bk </span>
-                                <input value=1000 >
-                              </div>
-                              <div>
-                                  <input type="checkbox" name="carottages" value="GZ1" checked>
-                                  <span class= 'check_carottages'> GZ1 </span>
-                                  <input value=200 >
-                              </div>
-                              <div>
-                                  <input type="checkbox" name="carottages" value="GZ2" checked>
-                                  <span class= 'check_carottages'> GZ2 </span>
-                                  <input value=3000 >
-                              </div>
-                              <div>
-                                  <input type="checkbox" name="carottages" value="GZ3">
-                                  <span class= 'check_carottages'> GZ3 </span>
-                                  <input value=2000 >
-                              </div>
+                              <div name="allCorotages" style="width: 300px">
+                                  <div class="check_carottages">
+                                      <div>
+                                        <input type="checkbox" name="carottages" value="bk" checked>
+                                        <span> bk </span>
+                                      </div>
+                                    <input value=1000 >
+                                  </div>
+                                  <div class="check_carottages">
+                                      <div>
+                                          <input type="checkbox" name="carottages" value="GZ1" checked>
+                                          <span> GZ1 </span>
+                                      </div>
+                                      <input value=200 >
+                                  </div>
+                                  <div class="check_carottages">
+                                      <div>
+                                          <input type="checkbox" name="carottages" value="GZ2" checked>
+                                          <span> GZ2 </span>
+                                      </div>
+                                      <input value=3000 >
+                                  </div>
+                                  <div class="check_carottages">
+                                      <div>
+                                          <input type="checkbox" name="carottages" value="GZ3">
+                                          <span> GZ3 </span>
+                                      </div>
+                                      <input value=2000 >
+                                  </div>
 
-                              <div>
-                                  <input type="checkbox" name="carottages" value="GZ4">
-                                  <span class= 'check_carottages'> GZ4 </span>
-                                  <input value=500 >
+                                  <div class="check_carottages">
+                                      <div>
+                                          <input type="checkbox" name="carottages" value="GZ4">
+                                          <span> GZ4 </span>
+                                      </div>
+                                      <input value=500 >
+                                  </div>
+                                  <div class="check_carottages">
+                                      <div>
+                                          <input type="checkbox" name="carottages" value="GZ5">
+                                          <span> GZ5 </span>
+                                      </div>
+                                      <input value=1000 >
+                                  </div>
+                                  <div class="check_carottages">
+                                      <div>
+                                          <input type="checkbox" name="carottages" value="GZ7" >
+                                          <span> GZ7 </span>
+                                      </div>
+                                      <input value=1000 >
+                                  </div>
+                                  <div class="check_carottages">
+                                      <div>
+                                          <input type="checkbox" name="carottages" value="DGK"checked>
+                                          <span> DGK </span>
+                                      </div>
+                                      <input value=1000 >
+                                  </div>
+                                  <div class="check_carottages">
+                                      <div>
+                                          <input type="checkbox" name="carottages" value="NKTD">
+                                          <span> NKTD </span>
+                                      </div>
+                                      <input value=1000 >
+                                  </div>
+                                  <div class="check_carottages">
+                                      <div>
+                                          <input type="checkbox" name="carottages" value="NKTM">
+                                          <span> NKTM </span>
+                                      </div>
+                                      <input value=1000 >
+                                  </div>
+                                  <div class="check_carottages">
+                                      <div>
+                                          <input type="checkbox" name="carottages" value="NKTR">
+                                          <span> NKTR </span>
+                                      </div>
+                                      <input value=1000 >
+                                  </div>
+                                  <div class="check_carottages">
+                                      <div>
+                                          <input  type="checkbox" name="carottages" value="ALPS">
+                                          <span> ALPS </span>
+                                      </div>
+                                      <input value=1000 >
+                                  </div>
                               </div>
-                              <div>
-                                  <input type="checkbox" name="carottages" value="GZ5">
-                                  <span class= 'check_carottages'> GZ5 </span>
-                                  <input value=1000 >
-                              </div>
-                              <div>
-                                  <input type="checkbox" name="carottages" value="GZ7" >
-                                  <span class= 'check_carottages'> GZ7 </span>
-                                  <input value=1000 >
-                              </div>
-                              <div>
-                                  <input type="checkbox" name="carottages" value="DGK"checked>
-                                  <span class= 'check_carottages'> DGK </span>
-                                  <input value=1000 >
-                              </div>
-                              <div>
-                                  <input type="checkbox" name="carottages" value="NKTD">
-                                  <span class= 'check_carottages'> NKTD </span>
-                                  <input value=1000 >
-                              </div>
-                              <div>
-                                  <input type="checkbox" name="carottages" value="NKTM">
-                                  <span class= 'check_carottages'> NKTM </span>
-                                  <input value=1000 >
-                              </div>
-                              <div>
-                                  <input type="checkbox" name="carottages" value="NKTR">
-                                  <span class= 'check_carottages'> NKTR </span>
-                                  <input value=1000 >
-                              </div>
-                              <div>
-                                  <input  type="checkbox" name="carottages" value="ALPS">
-                                  <span class= 'check_carottages'> ALPS </span>
-                                  <input value=1000 >
-                              </div>
-
                               <!--
                               <div id='carottages-div'>
                                   <select name="carottages" class="selectpicker form-control">
