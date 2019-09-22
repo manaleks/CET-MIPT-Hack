@@ -30,6 +30,7 @@ def predict(features, id_, thrashhold=0.5):
     costs['ALPS'] = 1150
 
     corotages = ['bk', 'GZ1', 'GZ2', 'GZ3', 'GZ4', 'GZ5', 'GZ7', 'DGK', 'NKTD', 'NKTM', 'NKTR', 'ALPS']
+    
     DELTA = 0.08950000000004366
 
     df_no_null = df.copy()
@@ -56,12 +57,12 @@ def predict(features, id_, thrashhold=0.5):
             X_train.drop(item, axis=1, inplace=True)
             X_test.drop(item, axis=1, inplace=True)       
 
-    model = CatBoostClassifier(iterations=100,
+    model = CatBoostClassifier(iterations=1,
                               learning_rate=0.1,
                               depth=5, custom_metric='F1', random_seed=19)
     model.fit(X_train, y_train)
 
-    model_lith = CatBoostClassifier(iterations=200,
+    model_lith = CatBoostClassifier(iterations=2,
                               learning_rate=0.01,
                               depth=10)
     model_lith.fit(X_train, y_lith_train)
@@ -97,4 +98,28 @@ def predict(features, id_, thrashhold=0.5):
 
     results.to_csv('data/submission.csv')
     test.to_csv('data/final.csv')
-    return
+
+    col = int(len(preds) * 0.3)
+    train_pred = model.predict(X_train[:col])
+
+
+    total_money = 0
+    other_money = 0
+    for item in corotages:
+        if item  in features:
+            print (item)
+            total_money += costs[item]
+        else:
+            other_money += costs[item]
+    cnt = 0
+    cnt1 = 0
+    cnt2 = 0
+    for i in range(col):
+        if train_pred[i] == 1 and y_train.iloc[i] == 1:
+            cnt += 1
+        if train_pred[i] == 0 and y_train.iloc[i] == 1:
+            cnt1 += 1
+        if train_pred[i] == 1 and y_train.iloc[i] == 0:
+            cnt2 += 1
+     
+    return round(-col * total_money * DELTA - other_money * (cnt1 + cnt2)* DELTA + DELTA * cnt  * 0.7 * 100 * 860 * 4.15 )
