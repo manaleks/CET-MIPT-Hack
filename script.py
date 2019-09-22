@@ -45,6 +45,7 @@ def predict(features, id_, thrashhold=0.5):
     X_train.drop('goal', axis=1, inplace=True)
     X_train.drop('well id', axis=1, inplace=True)
     y_train = train['goal'].copy()
+    y_lith_train = train['lith'].copy()
     
     X_test = test.copy()
     ids = test['id'].copy()
@@ -60,6 +61,12 @@ def predict(features, id_, thrashhold=0.5):
                               depth=5, custom_metric='F1', random_seed=19)
     model.fit(X_train, y_train)
 
+    model_lith = CatBoostClassifier(iterations=200,
+                              learning_rate=0.01,
+                              depth=10)
+    model_lith.fit(X_train, y_lith_train)
+    lith_preds = model_lith.predict(X_test)
+
     probs = model.predict_proba(X_test)
 
     preds = np.copy(probs[:,1])
@@ -67,10 +74,17 @@ def predict(features, id_, thrashhold=0.5):
     preds[preds >= thrashhold] = 1
     
     test['goal'] = preds
+    test['lith'] = lith_preds
     
     res = {}
     for i in range(len(preds)):
         res[ids[i]] = preds[i]
+
+    res_lith = {}
+    for i in range(len(lith_preds)):
+        res_lith[ids[i]] = lith_preds[i]
+
+
 
     #results = pd.read_excel('result.xlsx')
     results = pd.read_excel('data/result.xlsx')
@@ -79,6 +93,7 @@ def predict(features, id_, thrashhold=0.5):
     for i in range(len(results)):
         cur_id = results.iloc[i]['id']
         results.loc[i, 'goal'] = res[cur_id]
+        results.loc[i, 'lith'] = res_lith[cur_id]
 
     results.to_csv('data/submission.csv')
     test.to_csv('data/final.csv')
