@@ -1,6 +1,19 @@
+
+import pandas as pd
+import numpy as np
+import sklearn 
+import catboost
+
+from catboost import CatBoostClassifier
+
 def predict(features, id_, thrashhold=0.5):
-    df = pd.read_excel('train_first.xlsx')
-    test_df = pd.read_excel('test.xlsx')
+    #df = pd.read_excel('train_first.xlsx')
+    #test_df = pd.read_excel('test.xlsx')
+
+    df = pd.read_excel('data/train.xlsx')
+    test_df = pd.read_excel('data/test.xlsx')
+
+    
 
     costs = {}
     costs['bk'] = 2450
@@ -42,9 +55,9 @@ def predict(features, id_, thrashhold=0.5):
             X_train.drop(item, axis=1, inplace=True)
             X_test.drop(item, axis=1, inplace=True)       
 
-    model = CatBoostClassifier(iterations=500,
+    model = CatBoostClassifier(iterations=100,
                               learning_rate=0.1,
-                              depth=10, custom_metric='F1', random_seed=19)
+                              depth=5, custom_metric='F1', random_seed=19)
     model.fit(X_train, y_train)
 
     probs = model.predict_proba(X_test)
@@ -59,12 +72,14 @@ def predict(features, id_, thrashhold=0.5):
     for i in range(len(preds)):
         res[ids[i]] = preds[i]
 
-    results = pd.read_excel('result.xlsx')
+    #results = pd.read_excel('result.xlsx')
+    results = pd.read_excel('data/result.xlsx')
+    
 
     for i in range(len(results)):
         cur_id = results.iloc[i]['id']
         results.loc[i, 'goal'] = res[cur_id]
 
-    results.to_csv('submission.csv')
-    test.to_csv('final.csv')
+    results.to_csv('data/submission.csv')
+    test.to_csv('data/final.csv')
     return

@@ -1,4 +1,6 @@
 
+import script
+
 # standart libs
 import os
 import sys
@@ -27,18 +29,25 @@ import catboost
 
 app = Flask(__name__)
 
+
+
+
+#script.predict(['bk',	'GZ1',	'GZ2',	'GZ3'], 1)
+
+
 # Main
 @app.route('/', methods=['GET', 'POST'])
 def main():
     
-    df = pd.read_csv('data/test.csv')
+    df = pd.read_csv('data/final.csv')
 
     TOTAL_WELLS = df['well id'].unique()
     TOTAL_WELLS = TOTAL_WELLS[np.logical_not(np.isnan(TOTAL_WELLS))]
     TOTAL_WELLS.sort()
     TOTAL_WELLS = TOTAL_WELLS.astype(np.int32)
 
-    TOTAL_CAROTTAGE = list(df.columns.drop(['well id', 'depth, m', 'lith', 'goal']))
+    #TOTAL_CAROTTAGE = list(df.columns.drop(['well id', 'depth, m', 'lith', 'goal']))
+    TOTAL_CAROTTAGE = list(df.columns.drop(['well id', 'depth, m', 'goal']))
 
     if request.method == 'POST':
 
@@ -48,7 +57,9 @@ def main():
         carottages = request.form.getlist('carottages')
 
         # read full data csv
-        df = pd.read_csv('data/test.csv')
+        df = pd.read_csv('data/final.csv')
+
+        print(df.head())
 
         # choose well
         indexNames = df[df['well id'] != well ].index

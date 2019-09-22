@@ -9,7 +9,8 @@ var headerValues = ["well id", "depth, m"];
 chosen_carottages.forEach(function(element) {
   headerValues.push(element);
 });
-headerValues.push("lith", "goal");
+//headerValues.push("lith", "goal");
+headerValues.push("goal");
 
 // check chosen  well
 if (csv_name !== '') {
@@ -60,7 +61,6 @@ Plotly.d3.csv(csv_name, function(err, rows){
 
 
   var data = [table];
-
 
   chosen_carottages.forEach(function(element) {
 
