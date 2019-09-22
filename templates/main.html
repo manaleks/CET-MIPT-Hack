@@ -57,14 +57,15 @@
                       <form action="{{ url_for('main') }}" method="POST">
                           <div class="form-group">
                               <div class="input-group">
-                                  <select name="well" class="selectpicker form-control">
+
+                                  <select name="well" class="selectpicker form-control" style='margin: 5px 0px 10px 0px'>
                                       <option value="" disabled selected>Скважина</option>
                                       {% for o in wells %}
                                       <option type="text" value="{{o}}"> {{o}} </option>
                                       {% endfor %}
                                   </select>
 
-                                  <div style='padding: 50px 10px 20px 30px; color: red;'>
+                                  <div style='padding: 10px 10px 20px 20px; color: red;'>
                                       {{ error_mess }} 
                                   </div>
                               </div>
@@ -192,30 +193,54 @@
                   </div>
   
                   <div class="w3-container w3-twothird">
-                      MONEY
-
+                      
                       <script src="http://d3js.org/d3.v3.min.js"></script>
 
                       <script type="text/javascript"charset="utf-8">
                           d3.text(csv_name, function(data) {
                               var parsedCSV = d3.csv.parseRows(data);
 
-                              table = document.createElement('table')
+                              
 
-                              my_div = document.getElementById("app");
-                              document.body.insertBefore(table, my_div);
+                              
+                              var labels = ['well id', 'depth, m']
+                              chosen_carottages.forEach(function(element) {
+                                labels.push(element);
+                              });
+                              labels.push("lith", "goal");
+
+                              numbers = [];
+                              for (var i = 0; i < parsedCSV[0].length; i++) {
+                                if (labels.includes(parsedCSV[0][i])) {
+                                  numbers.push(i);
+                                }
+                              }
+
+                              table = document.getElementById("table");
+                              //table = document.createElement('table');
+
+                              //my_div = document.getElementById("app");
+                              //document.body.insertBefore(table, my_div);
 
                               for (var i = 0; i < parsedCSV.length; i++) {
 
                                 tr = document.createElement('tr')
 
                                 for (var j = 0; j < parsedCSV[i].length; j++) {
-                                  td = document.createElement('td');
-                                  td.text = parsedCSV[i][j];
+                                  if (numbers.includes(j)){
 
-                                  var x = tr.insertCell(-1);
-                                  x.innerHTML=parsedCSV[i][j];
-                                
+                                    if (j > parsedCSV[i].length-3 && i > 0){
+
+                                      var x = tr.insertCell(-1);
+                                      var element = document.createElement("input");
+                                      element.value=parsedCSV[i][j];
+                                      x.appendChild(element);
+                                    }
+                                    else {
+                                      var x = tr.insertCell(-1);
+                                      x.innerHTML=parsedCSV[i][j];
+                                    }
+                                  }
                                 }
 
                                 table.appendChild(tr);
@@ -228,6 +253,8 @@
 
                       <div id="graph"></div>
                   </div>
+
+                  <table id='table'></table>
 
               </div>
 

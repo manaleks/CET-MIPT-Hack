@@ -46,8 +46,8 @@ def main():
     TOTAL_WELLS.sort()
     TOTAL_WELLS = TOTAL_WELLS.astype(np.int32)
 
-    #TOTAL_CAROTTAGE = list(df.columns.drop(['well id', 'depth, m', 'lith', 'goal']))
-    TOTAL_CAROTTAGE = list(df.columns.drop(['well id', 'depth, m', 'goal']))
+    TOTAL_CAROTTAGE = list(df.columns.drop(['well id', 'depth, m', 'lith', 'goal']))
+    #TOTAL_CAROTTAGE = list(df.columns.drop(['well id', 'depth, m', 'goal']))
 
     if request.method == 'POST':
 

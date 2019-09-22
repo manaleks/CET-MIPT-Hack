@@ -10,8 +10,8 @@ var headerValues = ["well id", "depth, m"];
 chosen_carottages.forEach(function(element) {
   headerValues.push(element);
 });
-//headerValues.push("lith", "goal");
-headerValues.push("goal");
+headerValues.push("lith", "goal");
+
 
 // check chosen  well
 if (csv_name !== '') {
@@ -37,29 +37,6 @@ Plotly.d3.csv(csv_name, function(err, rows){
   }
   
   // create table
-  var table = {
-    type: 'table',
-    columnwidth: [150,200,200,150],
-    columnorder: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17],
-    header: {
-      values: headerValues, 
-      align: "center",
-      line: {width: 1, color: 'rgb(50, 50, 50)'},
-      fill: {color: ['#310062']},
-      font: {family: "Arial", size: 11, color: "white"}
-    },
-    cells: {
-      values: cellValues,
-      align: ["center", "center"],
-      line: {color: "black", width: 1},
-      fill: {color: ['#C1D0EE', 'rgba(228, 222, 249, 0.65)']},
-      font: {family: "Arial", size: 10, color: ["black"]}
-    },
-    xaxis: 'x',
-    yaxis: 'y',
-    domain: {x: [0,0.4], y: [0,1]}
-  }
-
 
   //var data = [table];
   var data = [];
@@ -102,7 +79,7 @@ Plotly.d3.csv(csv_name, function(err, rows){
   
   // define layout
   var layout = {
-    title: "TABLE_NAME",
+    title: "Результаты исследований",
     plot_bgcolor: 'rgba(228, 222, 249, 0.65)',
     showlegend: true,
     xaxis1: Object.assign(axis1,axis),
