@@ -5,9 +5,10 @@ import script
 import os
 import sys
 import shutil
-import requests
 import base64
 import json
+
+import requests
 
 # flask
 from flask import Flask
@@ -27,10 +28,14 @@ import catboost
 
 #TOTAL_carottages = ['bk',	'GZ1',	'GZ2',	'GZ3',	'GZ4',	'GZ5',	'GZ7',	'DGK',	'NKTD',	'NKTM',	'NKTR',	'ALPS']
 
+
+try:
+    os.mkdir('static/data')
+except:
+    print('static/data exist')
+
+
 app = Flask(__name__)
-
-
-
 
 #script.predict(['bk',	'GZ1',	'GZ2',	'GZ3'], 1)
 
